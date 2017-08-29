@@ -12,7 +12,7 @@ from livereload import Server
 
 logging.basicConfig(level=logging.ERROR)
 ARTICLES_PATH = 'articles'
-HTML_PATH = 'website'
+HTML_PATH = 'docs'
 
 
 def load_file(filepath):
