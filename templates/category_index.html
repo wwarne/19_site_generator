@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ section_name }} | Энциклопедия DEVMAN
+{% endblock %}
+
+{% block head %}
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+  <div class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="../index.html">DEVMAN Энциклопедия</a></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+<div class="row">
+<ol class="breadcrumb">
+  <li><a href="../index.html">Home</a></li>
+  <li class="active">{{ section_name }}</li>
+</ol>
+</div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2>{{ section_name }}</h2>
+            <div class="list-group">
+            {% for article in articles %}
+                <a href="../{{ article.href|urlencode }}" class="list-group-item">{{ article.title|escape }}</a>
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+{% endblock %}

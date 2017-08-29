@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Энциклопедия DEVMAN
+{% endblock %}
+
+
+
+{% block container %}
+<div class="container">
+
+    {% for topic_row in articles.items() | batch(4) %}
+    <div class="row">
+        {% for section_name, sec_articles in topic_row %}
+        <div class="col-md-3">
+            <h2>{{ topic_names[section_name] }}</h2>
+            <div class="list-group">
+            {% for article in sec_articles %}
+                <a href="{{ article.href|urlencode }}" class="list-group-item">{{ article.title|escape }}</a>
+            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}
