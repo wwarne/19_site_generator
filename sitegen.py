@@ -1,3 +1,4 @@
+import argparse
 import logging
 import os
 import markdown
@@ -165,8 +166,13 @@ def make_site():
         print('Errors with config.json.')
 
 if __name__ == '__main__':
-    # server = Server()
-    # server.watch(ARTICLES_PATH + '/*.html', make_site)
-    # server.watch('templates/*.html', make_site)
-    # server.serve(root=HTML_PATH)
-    make_site()
+    parser = argparse.ArgumentParser(description='Static website generator')
+    parser.add_argument('mode', nargs='?', help='Use `watch` to watch the changes and re-generate website', type=str)
+    parameters = parser.parse_args()
+    if parameters.mode.lower() == 'watch':
+        server = Server()
+        server.watch('templates/*.html', make_site)
+        server.watch('templates/*.css', copy_css)
+        server.serve(root=HTML_PATH)
+    else:
+        make_site()
