@@ -165,14 +165,15 @@ def make_site():
     else:
         print('Errors with config.json.')
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Static website generator')
     parser.add_argument('mode', nargs='?', help='Use `watch` to watch the changes and re-generate website', type=str)
     parameters = parser.parse_args()
-    if parameters.mode.lower() == 'watch':
+    if parameters.mode is None:
+        make_site()
+    elif parameters.mode.lower() == 'watch':
         server = Server()
         server.watch('templates/*.html', make_site)
-        server.watch('templates/*.css', copy_css)
+        server.watch('templates/css/*.css', copy_css)
         server.serve(root=HTML_PATH)
-    else:
-        make_site()
