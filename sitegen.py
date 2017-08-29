@@ -67,7 +67,7 @@ def make_main_index(topics, categories):
         'topic_names': topics,
         'articles': categories
     }
-    index_html = render('index.html', data_to_template)
+    index_html = render('main_index.html', data_to_template)
     main_index_path = get_saving_file_path(source_path='index.html', topic_slug='')
     save_file(filepath=main_index_path, data_to_write=index_html)
 
